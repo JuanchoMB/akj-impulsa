@@ -1,0 +1,24 @@
+{
+  "name": "akj-impulsa",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Piloto web de AKJ Impulsa: ofertas y solicitudes entre clientes y emprendimientos de Armenia.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:demo": "vite --mode demostracion --port 5182",
+    "build": "vite build",
+    "preview": "vite preview",
+    "probar:sql": "node supabase/pruebas/probar_migraciones.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.11",
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.31",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.3.5"
+  }
+}

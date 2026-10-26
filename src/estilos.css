@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f5f1;
+  }
+  body {
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Foco visible para quien navega con teclado (RNF05). */
+  :focus-visible {
+    outline: 3px solid #2447a0;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  main:focus {
+    outline: none;
+  }
+}
+
+@layer components {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    line-height: 1;
+    user-select: none;
+  }
+  .icono-relleno {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .saltar-contenido {
+    position: absolute;
+    left: 0.5rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: #2447a0;
+    color: #fff;
+    font-weight: 700;
+  }
+  .saltar-contenido:focus {
+    top: 0.5rem;
+  }
+
+  /* Perforaciones de la ficha de solicitud (inspirada en las fichas de las modisterías). */
+  .ficha-perforada {
+    background-image: radial-gradient(circle, #e2e3df 0 5px, transparent 5.5px);
+    background-size: 28px 14px;
+    background-repeat: repeat-x;
+    background-position: center;
+    height: 14px;
+  }
+
+  .sello {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .campo {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 1rem;
+    border-radius: 10px;
+    background: #fff;
+    border: 1.5px solid #d9dcd3;
+    color: #2a211c;
+    font-size: 17px;
+    line-height: 26px;
+  }
+  .campo:focus {
+    outline: none;
+    border-color: #2447a0;
+    box-shadow: 0 0 0 3px rgba(36, 71, 160, 0.18);
+  }
+  .campo[aria-invalid='true'] {
+    border-color: #b3263a;
+  }
+  textarea.campo {
+    padding: 0.75rem 1rem;
+    resize: vertical;
+  }
+
+  .boton-principal {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 1.25rem;
+    border-radius: 10px;
+    background: #2447a0;
+    color: #fff;
+    font-weight: 700;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+  }
+  .boton-principal:hover {
+    background: #1b367a;
+  }
+  .boton-principal:active {
+    transform: scale(0.99);
+  }
+  .boton-principal:disabled {
+    background: #a9b3cf;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .boton-secundario {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 1.25rem;
+    border-radius: 10px;
+    background: #fff;
+    color: #2447a0;
+    border: 1.5px solid #d9dcd3;
+    font-weight: 700;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.15s ease;
+  }
+  .boton-secundario:hover {
+    background: #f3f4f0;
+  }
+  .boton-secundario:disabled {
+    color: #747683;
+    cursor: not-allowed;
+  }
+
+  .girando {
+    animation: girar 0.9s linear infinite;
+  }
+  @keyframes girar {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .entrada-suave {
+    animation: entrar 0.18s ease-out;
+  }
+  @keyframes entrar {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .hoja-entrada {
+    animation: subir 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes subir {
+    from {
+      transform: translateY(40px);
+      opacity: 0.4;
+    }
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+}
+
+/* Sellos por estado (sección 6 del Componente 2). Van fuera de @layer porque el nombre de la clase
+   se arma en JavaScript (sello-${estado}) y Tailwind no lo detecta al compilar. */
+.sello-pendiente {
+  border: 1.5px solid #2447a0;
+  color: #2447a0;
+  background: #fff;
+}
+.sello-en_atencion {
+  border: 1.5px solid #e3a72f;
+  background: #e3a72f;
+  color: #2a211c;
+}
+.sello-cerrada {
+  border: 1.5px solid #6f6a64;
+  color: #6f6a64;
+  background: #e2e3df;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Uso en computador (sección 2.1 del Componente 2): desde 768 px, una columna central de 480 px. */
+@media (min-width: 768px) {
+  html {
+    background: #e9ebe5;
+  }
+  body {
+    max-width: 480px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-shadow: 0 0 0 1px #d9dcd3;
+  }
+  .fijo-columna {
+    left: 50% !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: 480px;
+    transform: translateX(-50%);
+  }
+}
