@@ -76,7 +76,7 @@ function accionPrincipal(ctx, o) {
   return `
     <div class="sticky bottom-[calc(4.5rem_+_env(safe-area-inset-bottom))] z-10 -mx-margin px-margin pt-2 pb-2 bg-surface/95 backdrop-blur-md">
       <a href="${href}" class="boton-principal">${icono('send')} Enviar solicitud</a>
-      ${sesion ? '' : '<p class="mt-1.5 text-center font-body-sm text-body-sm text-on-surface-variant">Te pediremos entrar con tu cuenta de prueba.</p>'}
+      ${sesion ? '' : '<p class="mt-1.5 text-center font-body-sm text-body-sm text-on-surface-variant">Te pediremos entrar con tu cuenta.</p>'}
     </div>`;
 }
 

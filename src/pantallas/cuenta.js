@@ -24,7 +24,7 @@ function tarjetaPerfil(sesion) {
 
 function seccionNegocio(negocio, editable) {
   if (!negocio) {
-    return `<p class="font-body-sm text-body-sm text-on-surface-variant">Tu cuenta todavía no tiene un negocio asociado. Pídele al equipo del piloto que lo cree.</p>`;
+    return `<p class="font-body-sm text-body-sm text-on-surface-variant">Tu cuenta todavía no tiene un negocio asociado.</p>`;
   }
   // Sin la migración 05 la base no deja cambiar el contacto: se muestra solo para leer.
   if (!editable) {
@@ -34,7 +34,7 @@ function seccionNegocio(negocio, editable) {
         <span class="font-body-bold text-body-bold text-on-surface">${esc(negocio.nombre)}</span>
         <span class="font-body-bold text-body-sm text-on-surface mt-1">Contacto para clientes</span>
         <span class="font-mono-code text-mono-code text-on-surface-variant break-all">${esc(negocio.contacto || 'Sin contacto registrado')}</span>
-        <span class="font-body-sm text-[13px] text-on-surface-variant">Por ahora el contacto lo registra el equipo del piloto.</span>
+        <span class="font-body-sm text-[13px] text-on-surface-variant">Por ahora el contacto lo registra el equipo de AKJ Impulsa.</span>
       </section>`;
   }
   return `
@@ -71,7 +71,6 @@ export default async function cuenta(ctx) {
       <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Cuenta</h1>
       ${tarjetaPerfil(sesion)}
       ${sesion.rol === 'emprendedor' ? seccionNegocio(negocio, editable) : ''}
-      <p class="font-body-sm text-body-sm text-on-surface-variant">Esta es una cuenta de prueba del piloto. Los datos son ficticios.</p>
       <button type="button" id="cerrar-sesion"
               class="w-full min-h-[52px] rounded-xl border-2 border-secondary/40 text-secondary font-body-bold text-body-bold flex items-center justify-center gap-2 hover:bg-secondary/5">
         ${icono('logout')} Cerrar sesión

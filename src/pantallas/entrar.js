@@ -34,10 +34,10 @@ export default async function entrar(ctx) {
       <div class="flex flex-col gap-1">
         <div class="flex items-center gap-2 mb-1">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-[8px] bg-primary/10 text-primary">${icono('key', 'text-[18px]')}</span>
-          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Acceso al piloto</span>
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Tu cuenta</span>
         </div>
         <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Entrar</h1>
-        <p class="font-body-base text-body-base text-on-surface-variant">Usa la cuenta de prueba que te dio el equipo del piloto.</p>
+        <p class="font-body-base text-body-base text-on-surface-variant">Escribe tu correo y tu contraseña.</p>
       </div>
 
       ${avisoSesion}
@@ -63,10 +63,6 @@ export default async function entrar(ctx) {
       </form>
 
       ${ayudaDemostracion()}
-
-      <p class="font-body-sm text-body-sm text-on-surface-variant">
-        Las cuentas son de prueba y los datos son ficticios. No escribas aquí contraseñas de otros servicios.
-      </p>
     </div>`;
 
   const form = ctx.main.querySelector('#form-entrar');
