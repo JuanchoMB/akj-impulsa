@@ -4,7 +4,7 @@ import { ESTADOS, M } from '../mensajes.js';
 import { mostrarAviso } from '../ui/avisos.js';
 import { bannerError, cargando, perforacion } from '../ui/componentes.js';
 import { categoria, esc, fechaHora, ficha, icono, primerNombre, sello } from '../ui/formato.js';
-import { activarEtiqueta, botonActualizar, girar } from './actualizacion.js';
+import { activarEtiqueta, actualizarAlVolver, botonActualizar, girar } from './actualizacion.js';
 
 const PESTANAS = ['pendiente', 'en_atencion', 'cerrada'];
 
@@ -115,7 +115,7 @@ export default async function panel(ctx) {
       const conteo = e === 'cerrada' ? '' : conteos[e];
       return `
         <button type="button" role="tab" data-estado="${e}" aria-selected="${activa}" id="pestana-${e}"
-                class="flex-1 min-h-[48px] px-2 rounded-lg flex items-center justify-center gap-1.5 text-body-sm transition-colors ${
+                class="flex-1 min-w-0 min-h-[48px] px-1.5 rounded-lg flex items-center justify-center gap-1 text-[15px] whitespace-nowrap transition-colors ${
                   activa ? 'bg-primary text-on-primary font-body-bold' : 'text-on-surface hover:bg-surface-container font-body-base'
                 }">
           <span>${ESTADOS[e].plural}</span>
@@ -185,5 +185,6 @@ export default async function panel(ctx) {
 
   pintarPestanas({});
   ctx.main.querySelector('[data-actualizar]').addEventListener('click', () => cargar({ manual: true }));
+  actualizarAlVolver(ctx, () => cargar());
   await cargar();
 }

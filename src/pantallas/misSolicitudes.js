@@ -4,7 +4,7 @@ import { M } from '../mensajes.js';
 import { mostrarAviso } from '../ui/avisos.js';
 import { bannerError, cargando, explicacionEstados, perforacion, textoCierre } from '../ui/componentes.js';
 import { categoria, esc, fechaHora, ficha, icono, sello } from '../ui/formato.js';
-import { activarEtiqueta, botonActualizar, girar } from './actualizacion.js';
+import { activarEtiqueta, actualizarAlVolver, botonActualizar, girar } from './actualizacion.js';
 import { borrarBorrador, leerBorrador } from './borrador.js';
 
 const GIROS = ['-rotate-2', 'rotate-1', '-rotate-1'];
@@ -94,5 +94,6 @@ export default async function misSolicitudes(ctx) {
   }
 
   ctx.main.querySelector('[data-actualizar]').addEventListener('click', () => cargar({ manual: true }));
+  actualizarAlVolver(ctx, () => cargar());
   await cargar();
 }

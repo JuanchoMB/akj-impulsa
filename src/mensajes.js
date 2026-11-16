@@ -56,7 +56,8 @@ export const ESTADOS = {
   en_atencion: {
     nombre: 'En atención',
     plural: 'En atención',
-    explicacion: 'el negocio la está gestionando.',
+    // Ajuste de la validación (H4): "En atención" no significa que el trabajo ya empezó.
+    explicacion: 'el negocio la revisó y está acordando contigo; todavía no significa que el trabajo empezó.',
   },
   cerrada: {
     nombre: 'Cerrada',

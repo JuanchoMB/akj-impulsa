@@ -25,6 +25,19 @@ export function activarEtiqueta(ctx, obtenerFecha) {
   return pintar;
 }
 
+// Ajuste de la validación: al volver a la pestaña o a la app se recarga la lista sin pulsar Actualizar
+// (como mucho una vez cada 30 s, para no saturar el servicio).
+export function actualizarAlVolver(ctx, cargar) {
+  let ultima = Date.now();
+  const alCambiar = () => {
+    if (document.visibilityState !== 'visible' || Date.now() - ultima < 30000) return;
+    ultima = Date.now();
+    cargar();
+  };
+  document.addEventListener('visibilitychange', alCambiar);
+  ctx.alSalir(() => document.removeEventListener('visibilitychange', alCambiar));
+}
+
 export function girar(ctx, activo) {
   const boton = ctx.main.querySelector('[data-actualizar]');
   if (!boton) return;

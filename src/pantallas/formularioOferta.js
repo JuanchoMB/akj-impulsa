@@ -9,11 +9,12 @@ const LIMITES = { nombre: 80, descripcion: 500, aviso: 200 };
 const PRECIO_MAXIMO = 100000000;
 const miles = new Intl.NumberFormat('es-CO', { maximumFractionDigits: 0 });
 
-// "28.000", "28000" o "$ 28.000" → 28000. Decimales o letras → null (M25).
+// "28.000", "28,000", "28000" o "$ 28.000" → 28000. Decimales o letras → null (M25).
+// Ajuste de la validación (H1): también se acepta la coma como separador de miles.
 export function leerPrecio(texto) {
   const limpio = String(texto || '').replace(/[\s$]/g, '');
-  if (!/^(\d{1,3}(\.\d{3})+|\d+)$/.test(limpio)) return null;
-  const valor = Number(limpio.replaceAll('.', ''));
+  if (!/^(\d{1,3}(\.\d{3})+|\d{1,3}(,\d{3})+|\d+)$/.test(limpio)) return null;
+  const valor = Number(limpio.replace(/[.,]/g, ''));
   return valor > 0 && valor <= PRECIO_MAXIMO ? valor : null;
 }
 
@@ -93,7 +94,7 @@ export default async function formularioOferta(ctx) {
             <input id="precio" name="precio" type="text" inputmode="numeric" autocomplete="off" aria-describedby="ayuda-precio"
                    class="campo pl-9 font-mono-price text-mono-price" value="${o.precio_cop ? esc(miles.format(o.precio_cop)) : ''}" placeholder="0" />
           </div>
-          <span id="ayuda-precio" class="font-body-sm text-[13px] text-on-surface-variant">En pesos colombianos, sin decimales.</span>
+          <span id="ayuda-precio" class="font-body-sm text-[13px] text-on-surface-variant">Solo el valor en pesos, sin centavos. Ej.: 28000 o 28.000</span>
         </div>
 
         <label class="rounded-[10px] bg-surface-container-low p-4 flex items-start gap-3 cursor-pointer">
