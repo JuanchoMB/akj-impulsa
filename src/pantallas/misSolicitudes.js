@@ -14,9 +14,9 @@ function tarjeta(s, i) {
   const negocio = [s.negocio?.nombre, s.negocio?.zona].filter(Boolean).join(' · ');
   return `
     <li>
-      <article class="bg-surface-container-lowest rounded-[10px] overflow-hidden flex flex-col shadow-[0_1px_2px_rgba(0,0,0,0.04)]" aria-label="Ficha ${esc(ficha(s))}">
+      <article class="h-full bg-surface-container-lowest rounded-[10px] overflow-hidden flex flex-col shadow-[0_1px_2px_rgba(0,0,0,0.04)]" aria-label="Ficha ${esc(ficha(s))}">
         ${perforacion()}
-        <div class="p-4 pt-2 flex flex-col">
+        <div class="flex-1 p-4 pt-2 flex flex-col">
           <div class="flex items-start justify-between gap-3">
             <div class="flex flex-col min-w-0">
               <span class="font-mono-code text-[15px] font-bold text-secondary uppercase tracking-wider">${esc(ficha(s))}</span>
@@ -29,13 +29,13 @@ function tarjeta(s, i) {
             <span class="font-body-sm text-body-sm leading-tight">${esc(negocio)}</span>
           </div>
           ${s.estado === 'cerrada' ? `<div class="mt-3">${textoCierre(s.motivo_cierre)}</div>` : ''}
-          <div class="mt-3.5 bg-surface-container-low -mx-4 -mb-4 px-4 py-3 flex items-center justify-between gap-2">
+          <div class="mt-auto pt-3.5"><div class="bg-surface-container-low -mx-4 -mb-4 px-4 py-3 flex items-center justify-between gap-2">
             <span class="flex items-center gap-1.5 text-on-surface-variant shrink-0">
               ${icono('schedule', 'text-[16px]')}
               <span class="font-mono-code text-[12px] text-on-surface whitespace-nowrap">${esc(fechaHora(s.creada_en))}</span>
             </span>
             <span class="font-label-caps text-label-caps text-outline uppercase tracking-wider text-right min-w-0">${esc(cat.nombre)}</span>
-          </div>
+          </div></div>
         </div>
       </article>
     </li>`;
@@ -88,7 +88,7 @@ export default async function misSolicitudes(ctx) {
     if (borrador && lista.some((s) => s.id === borrador.id)) borrarBorrador();
 
     zona.innerHTML = lista.length
-      ? `<ul class="flex flex-col gap-4 entrada-suave">${lista.map(tarjeta).join('')}</ul>`
+      ? `<ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-5 entrada-suave">${lista.map(tarjeta).join('')}</ul>`
       : vacio;
     if (manual) mostrarAviso('Lista actualizada.', 'info');
   }

@@ -94,13 +94,13 @@ function acciones(s) {
 
 function hojaCierre(s) {
   return `
-    <div class="fixed inset-0 z-[70] flex items-end justify-center" id="capa-cierre">
+    <div class="fixed inset-0 z-[70] flex items-end md:items-center justify-center md:p-6" id="capa-cierre">
       <div class="absolute inset-0 bg-[#2A211C]/50 backdrop-blur-[2px]" data-cancelar aria-hidden="true"></div>
       <div role="dialog" aria-modal="true" aria-labelledby="titulo-cierre" aria-describedby="nota-cierre"
-           class="hoja-entrada relative w-full max-w-[480px] bg-surface-container-lowest rounded-t-[20px] shadow-2xl max-h-[92dvh] overflow-y-auto pb-safe">
+           class="hoja-entrada relative w-full max-w-[480px] md:max-w-[560px] bg-surface-container-lowest rounded-t-[20px] md:rounded-[20px] shadow-2xl max-h-[92dvh] md:max-h-[88dvh] overflow-y-auto pb-safe">
         <div class="w-full h-1 bg-primary"></div>
         <div class="relative pt-3 pb-1 flex justify-center">
-          <span class="w-12 h-1.5 bg-surface-variant rounded-full" aria-hidden="true"></span>
+          <span class="w-12 h-1.5 bg-surface-variant rounded-full md:invisible" aria-hidden="true"></span>
           <button type="button" data-cancelar class="absolute right-3 top-2 w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container" aria-label="Cancelar y volver">
             ${icono('close', 'text-[22px]')}
           </button>

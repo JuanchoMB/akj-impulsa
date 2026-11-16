@@ -219,22 +219,5 @@
   }
 }
 
-/* Uso en computador (sección 2.1 del Componente 2): desde 768 px, una columna central de 480 px. */
-@media (min-width: 768px) {
-  html {
-    background: #e9ebe5;
-  }
-  body {
-    max-width: 480px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    box-shadow: 0 0 0 1px #d9dcd3;
-  }
-  .fijo-columna {
-    left: 50% !important;
-    right: auto !important;
-    width: 100% !important;
-    max-width: 480px;
-    transform: translateX(-50%);
-  }
-}
+/* Uso en computador: desde 768 px el piloto usa el ancho de la pantalla (menú en el encabezado,
+   cuadrículas en las listas y anchos de lectura en detalles y formularios). Ver main.js y shell.js. */

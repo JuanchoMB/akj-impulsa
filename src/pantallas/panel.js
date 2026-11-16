@@ -15,7 +15,7 @@ function tarjeta(s) {
   return `
     <li>
       <a href="#/panel/${encodeURIComponent(s.id)}"
-         class="group block bg-surface-container-lowest rounded-xl overflow-hidden hover:bg-surface-container-low transition-colors shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+         class="group block h-full bg-surface-container-lowest rounded-xl overflow-hidden hover:bg-surface-container-low md:hover:shadow-md transition-[background-color,box-shadow] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
          aria-label="Ficha ${esc(ficha(s))}${nombre ? ` de ${esc(nombre)}` : ''}, ${esc(s.oferta?.nombre || '')}, ${esc(ESTADOS[s.estado]?.nombre || '')}">
         ${perforacion()}
         <div class="p-4 pt-2 flex items-start gap-3">
@@ -97,7 +97,7 @@ export default async function panel(ctx) {
         </div>
         ${botonActualizar()}
       </section>
-      <div id="pestanas" role="tablist" aria-label="Estados de las solicitudes" class="w-full bg-surface-container-high p-1 rounded-xl flex items-stretch gap-1"></div>
+      <div id="pestanas" role="tablist" aria-label="Estados de las solicitudes" class="w-full md:max-w-[560px] bg-surface-container-high p-1 rounded-xl flex items-stretch gap-1"></div>
       <div id="zona-lista" role="tabpanel">${cargando('Cargando solicitudes…')}</div>
       <footer class="bg-surface-container p-3.5 rounded-xl flex items-start gap-3">
         <span class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0">${icono('touch_app', 'text-[18px]')}</span>
@@ -136,7 +136,7 @@ export default async function panel(ctx) {
     pintarPestanas(conteos);
     const filtradas = lista.filter((s) => s.estado === estado);
     zona.innerHTML = filtradas.length
-      ? `<ul class="flex flex-col gap-3.5 entrada-suave">${filtradas.map(tarjeta).join('')}</ul>`
+      ? `<ul class="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3 md:gap-5 entrada-suave">${filtradas.map(tarjeta).join('')}</ul>`
       : vacio(estado, conteos);
     zona.querySelector('[data-ir]')?.addEventListener('click', (e) => cambiarPestana(e.currentTarget.dataset.ir));
   }

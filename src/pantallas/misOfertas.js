@@ -27,7 +27,7 @@ function tarjeta(o) {
   const cat = categoria(o.categoria);
   return `
     <li>
-      <article class="bg-surface-container-lowest rounded-[10px] p-space-md flex flex-col gap-space-md shadow-sm transition-opacity ${o.disponible ? '' : 'opacity-70'}" data-oferta="${esc(o.id)}">
+      <article class="h-full bg-surface-container-lowest rounded-[10px] p-space-md flex flex-col gap-space-md shadow-sm transition-opacity ${o.disponible ? '' : 'opacity-70'}" data-oferta="${esc(o.id)}">
         <div class="flex flex-col gap-1">
           <div class="flex items-center gap-2 flex-wrap">
             <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">${esc(cat.nombre)}</span>
@@ -46,7 +46,7 @@ function tarjeta(o) {
             <span class="font-mono-price text-mono-price text-primary font-bold">${esc(precio(o.precio_cop))}</span>
           </span>
         </div>
-        <div class="flex items-center justify-between gap-2 flex-wrap">
+        <div class="mt-auto flex items-center justify-between gap-2 flex-wrap">
           ${interruptor(o)}
           <a href="#/mis-ofertas/${encodeURIComponent(o.id)}/editar" class="font-body-bold text-body-sm text-primary hover:underline flex items-center gap-1 min-h-[44px] px-1">
             Editar detalles ${icono('arrow_forward', 'text-[16px]')}
@@ -85,7 +85,7 @@ export default async function misOfertas(ctx) {
       </div>
       ${
         ofertas.length
-          ? `<ul class="flex flex-col gap-space-md">${ofertas.map(tarjeta).join('')}</ul>`
+          ? `<ul class="grid gap-space-md md:grid-cols-2 lg:grid-cols-3 md:gap-5">${ofertas.map(tarjeta).join('')}</ul>`
           : `<div class="rounded-xl p-6 border-2 border-dashed border-outline-variant bg-surface-container-lowest text-center flex flex-col gap-4 items-center">
                <p class="font-body-base text-body-base">Aún no tienes ofertas. Crea la primera para que aparezca en el catálogo.</p>
                <a href="#/mis-ofertas/nueva" class="boton-principal">${icono('add')} Nueva oferta</a>

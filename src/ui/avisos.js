@@ -16,7 +16,7 @@ export function mostrarAviso(texto, tipo = 'exito') {
   const estilo = ESTILOS[tipo] || ESTILOS.info;
   const conBarra = document.body.dataset.conBarra === 'si';
   contenedor.innerHTML = `
-    <div role="status" class="fijo-columna fixed left-0 right-0 ${conBarra ? 'bottom-[84px]' : 'bottom-5'} z-[60] px-margin entrada-suave">
+    <div role="status" class="fixed left-0 right-0 ${conBarra ? 'bottom-[84px]' : 'bottom-5'} md:bottom-6 md:left-auto md:right-6 md:w-[420px] z-[60] px-margin md:px-0 entrada-suave">
       <div class="bg-inverse-surface text-inverse-on-surface rounded-[10px] px-4 py-3 flex items-start gap-2.5 shadow-lg">
         ${icono(estilo.icono, `${estilo.color} text-[20px] icono-relleno mt-0.5`)}
         <p class="font-body-sm text-body-sm flex-1">${esc(texto)}</p>

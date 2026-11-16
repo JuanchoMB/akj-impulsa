@@ -18,22 +18,30 @@ import formularioOferta from './pantallas/formularioOferta.js';
 
 // Mapa de navegación (sección 3 del Componente 2). "barra" es la pestaña activa de la barra inferior;
 // las pantallas de formulario y de detalle del emprendedor no la muestran, como en el diseño.
+// "menu" es la sección resaltada en el menú del encabezado en computador (por defecto, la de "barra").
+// "ancho" es el ancho máximo en computador: amplio para listas, medio para detalles y formularios.
 const RUTAS = [
-  { patron: '/', pantalla: catalogo, barra: 'ofertas', titulo: 'Ofertas' },
-  { patron: '/oferta/:id', pantalla: detalleOferta, barra: 'ofertas', titulo: 'Detalle de oferta' },
-  { patron: '/oferta/:id/solicitar', pantalla: enviarSolicitud, rol: 'cliente', titulo: 'Enviar solicitud' },
-  { patron: '/solicitud-registrada/:id', pantalla: solicitudRegistrada, rol: 'cliente', titulo: 'Solicitud registrada' },
-  { patron: '/envio-sin-confirmar', pantalla: envioSinConfirmar, rol: 'cliente', titulo: 'Envío sin confirmar' },
-  { patron: '/mis-solicitudes', pantalla: misSolicitudes, rol: 'cliente', barra: 'mis-solicitudes', titulo: 'Mis solicitudes' },
-  { patron: '/entrar', pantalla: entrar, barra: 'cuenta', soloInvitado: true, titulo: 'Entrar' },
-  { patron: '/cuenta', pantalla: cuenta, rol: 'sesion', barra: 'cuenta', titulo: 'Cuenta' },
-  { patron: '/panel', pantalla: panel, rol: 'emprendedor', barra: 'solicitudes', titulo: 'Solicitudes' },
-  { patron: '/panel/:id', pantalla: detalleSolicitud, rol: 'emprendedor', titulo: 'Detalle de solicitud' },
-  { patron: '/panel/:id/cerrar', pantalla: detalleSolicitud, rol: 'emprendedor', titulo: 'Cerrar solicitud', cerrar: true },
-  { patron: '/mis-ofertas', pantalla: misOfertas, rol: 'emprendedor', barra: 'mis-ofertas', titulo: 'Mis ofertas' },
-  { patron: '/mis-ofertas/nueva', pantalla: formularioOferta, rol: 'emprendedor', titulo: 'Nueva oferta' },
-  { patron: '/mis-ofertas/:id/editar', pantalla: formularioOferta, rol: 'emprendedor', titulo: 'Editar oferta' },
+  { patron: '/', pantalla: catalogo, barra: 'ofertas', ancho: 'amplio', titulo: 'Ofertas' },
+  { patron: '/oferta/:id', pantalla: detalleOferta, barra: 'ofertas', ancho: 'medio', titulo: 'Detalle de oferta' },
+  { patron: '/oferta/:id/solicitar', pantalla: enviarSolicitud, rol: 'cliente', menu: 'ofertas', ancho: 'medio', titulo: 'Enviar solicitud' },
+  { patron: '/solicitud-registrada/:id', pantalla: solicitudRegistrada, rol: 'cliente', menu: 'mis-solicitudes', ancho: 'medio', titulo: 'Solicitud registrada' },
+  { patron: '/envio-sin-confirmar', pantalla: envioSinConfirmar, rol: 'cliente', menu: 'ofertas', ancho: 'medio', titulo: 'Envío sin confirmar' },
+  { patron: '/mis-solicitudes', pantalla: misSolicitudes, rol: 'cliente', barra: 'mis-solicitudes', ancho: 'amplio', titulo: 'Mis solicitudes' },
+  { patron: '/entrar', pantalla: entrar, barra: 'cuenta', soloInvitado: true, ancho: 'angosto', titulo: 'Entrar' },
+  { patron: '/cuenta', pantalla: cuenta, rol: 'sesion', barra: 'cuenta', ancho: 'angosto', titulo: 'Cuenta' },
+  { patron: '/panel', pantalla: panel, rol: 'emprendedor', barra: 'solicitudes', ancho: 'amplio', titulo: 'Solicitudes' },
+  { patron: '/panel/:id', pantalla: detalleSolicitud, rol: 'emprendedor', menu: 'solicitudes', ancho: 'medio', titulo: 'Detalle de solicitud' },
+  { patron: '/panel/:id/cerrar', pantalla: detalleSolicitud, rol: 'emprendedor', menu: 'solicitudes', ancho: 'medio', titulo: 'Cerrar solicitud', cerrar: true },
+  { patron: '/mis-ofertas', pantalla: misOfertas, rol: 'emprendedor', barra: 'mis-ofertas', ancho: 'amplio', titulo: 'Mis ofertas' },
+  { patron: '/mis-ofertas/nueva', pantalla: formularioOferta, rol: 'emprendedor', menu: 'mis-ofertas', ancho: 'medio', titulo: 'Nueva oferta' },
+  { patron: '/mis-ofertas/:id/editar', pantalla: formularioOferta, rol: 'emprendedor', menu: 'mis-ofertas', ancho: 'medio', titulo: 'Editar oferta' },
 ];
+
+const ANCHOS = {
+  amplio: 'md:max-w-[1120px]',
+  medio: 'md:max-w-[760px]',
+  angosto: 'md:max-w-[520px]',
+};
 
 const main = document.getElementById('contenido');
 let sesion = null;
@@ -109,10 +117,10 @@ async function renderizar() {
   const miTurno = ++turno;
 
   document.title = r ? `${r.titulo} · AKJ Impulsa` : 'Página no encontrada · AKJ Impulsa';
-  pintarEncabezado(sesion, { ocultarEntrar: r?.patron === '/entrar' });
+  pintarEncabezado(sesion, { ocultarEntrar: r?.patron === '/entrar', activa: r?.menu || r?.barra || null });
   pintarBarra(sesion, r?.barra || null);
-  main.className = `block w-full max-w-[480px] mx-auto px-margin pt-[calc(4.5rem_+_env(safe-area-inset-top))] ${
-    r?.barra ? 'pb-[calc(7rem_+_env(safe-area-inset-bottom))]' : 'pb-10'
+  main.className = `block w-full max-w-[480px] ${ANCHOS[r?.ancho] || ANCHOS.medio} mx-auto px-margin md:px-8 pt-[calc(4.5rem_+_env(safe-area-inset-top))] md:pt-[calc(6.5rem_+_env(safe-area-inset-top))] ${
+    r?.barra ? 'pb-[calc(7rem_+_env(safe-area-inset-bottom))] md:pb-16' : 'pb-10 md:pb-16'
   } min-h-[100dvh] outline-none`;
   main.innerHTML = cargando();
   if (!r?.cerrar) window.scrollTo(0, 0);
