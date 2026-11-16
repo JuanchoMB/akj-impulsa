@@ -64,6 +64,7 @@ Después, en el SQL Editor de Supabase, ejecuta los archivos de `supabase/` en e
 | `02_datos_de_prueba.sql` | Perfiles, 2 negocios y 3 ofertas ficticias | Componente 1 (ya ejecutado) |
 | `04_reintento_sin_duplicados.sql` | Reintentar un envío sin duplicarlo (P6) | Componente 2 |
 | `05_campos_del_diseno.sql` | Ficha N.º, aviso, zona, contacto editable y oferta solicitada visible | Componente 3 |
+| `06_datos_demostracion.sql` | 14 cuentas (8 emprendedores, 6 clientes), 8 negocios, 24 ofertas y 17 solicitudes ficticias. Las cuentas nuevas copian la contraseña de cliente1. Se deshace con `06b_borrar_datos_demostracion.sql` | Validación y sustentación |
 
 El piloto **funciona aunque 04 y 05 todavía no se hayan ejecutado** (modo compatible), y usa los campos nuevos
 en cuanto existen, sin cambiar código:
